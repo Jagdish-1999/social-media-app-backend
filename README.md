@@ -5,9 +5,19 @@ This API allows users to interact with a social media platform, manage posts, li
 
 ---
 
-## 🚀 Features
+## 💁 Note:
 
-### 👉 You can see Detailed API Documentation [_`here`_]("http://localhost:3000/api-docs")
+> ### _Please keep in mind, I have not implement cookies for storing session. You have to pass `Authorization` in header to access protected routes._
+
+> Node version: `v23.6.0`
+
+> Npm version: `10.9.2`
+
+---
+
+## 👉 You can Test APIs [_`here`_]("http://localhost:3000/api-docs")
+
+## 🚀 Features
 
 ### 🧑‍💼 Users
 
@@ -130,11 +140,11 @@ This API allows users to interact with a social media platform, manage posts, li
 
 ### 🔹 **OTP Routes**
 
-| Method | Endpoint                  | Description                  |
-| ------ | ------------------------- | ---------------------------- |
-| `POST` | `/api/otp/send`           | Send OTP to registered email |
-| `POST` | `/api/otp/verify`         | Verify the OTP               |
-| `POST` | `/api/otp/reset-password` | Reset password using OTP     |
+| Method | Endpoint                  | Description            |
+| ------ | ------------------------- | ---------------------- |
+| `POST` | `/api/otp/send`           | Send OTP to your email |
+| `POST` | `/api/otp/verify`         | Verify the OTP         |
+| `POST` | `/api/otp/reset-password` | Reset password         |
 
 ---
 
@@ -143,6 +153,10 @@ This API allows users to interact with a social media platform, manage posts, li
 ### 📌 **1. Clone the Repository**
 
 ```sh
-git clone https://github.com/your-repo/social-media-backend.git
-cd social-media-backend
+git clone https://github.com/Jagdish-1999/social-media-app-backend.git
+cd social-media-app-backend
+npm install
+npm run dev
 ```
+
+Now you server is running at your specified port
