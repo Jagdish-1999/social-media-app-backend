@@ -1,0 +1,115 @@
+paths:
+      #? 1. Route for send otp
+      /api/likes/toggle/{postId}:
+            post:
+                  summary: Toggle like
+                  description: Add like if not else remove like if already liked
+                  tags:
+                        - Like
+                  parameters:
+                        - name: postId
+                          in: path
+                          required: true
+                          schema:
+                                type: string
+                  responses:
+                        201:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 201
+                                                      message:
+                                                            type: string
+                                                            example: Post liked successfully.
+                                                      data:
+                                                            $ref: "#components/schemas/Like"
+                        200:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 200
+                                                      message:
+                                                            type: string
+                                                            example: Like deleted successfully.
+                        400:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 400
+                                                      message:
+                                                            type: string
+                                                            example: <Error Message>
+
+      #? 2. Route for verify otp
+      /api/likes/{postId}:
+            get:
+                  summary: Fetch post likes
+                  description: Fetch likes of a specific post
+                  tags:
+                        - Like
+                  parameters:
+                        - name: postId
+                          in: path
+                          required: true
+                          schema:
+                                type: string
+                  responses:
+                        200:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 200
+                                                      message:
+                                                            type: string
+                                                            example: Post's Like fetched successfully
+                                                      data:
+                                                            type: array
+                                                            items:
+                                                                  type: object
+                                                                  properties:
+                                                                        _id:
+                                                                              type: string
+                                                                              example: 67af6ef3f77b6201da215398
+                                                                        postId:
+                                                                              type: string
+                                                                              example: 67af6ef3f77b6201da215398
+                                                                        userId:
+                                                                              type: object
+                                                                              properties:
+                                                                                    _id:
+                                                                                          type: string
+                                                                                          example: 67af6ef3f77b6201da215398
+                                                                                    name:
+                                                                                          type: string
+                                                                                          example: John Doe
+                                                                                    email:
+                                                                                          type: string
+                                                                                          example: john.doe@gmail.com
+                        400:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 400
+                                                      message:
+                                                            type: string
+                                                            example: <Error Message>

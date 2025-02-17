@@ -1,0 +1,129 @@
+paths:
+      #? 1. Route for send otp
+      /api/otp/send:
+            post:
+                  summary: Send OTP
+                  description: Sends a one-time password (OTP) to the user.
+                  tags:
+                        - OTP
+                  requestBody:
+                        required: true
+                        content:
+                              application/json:
+                                    schema:
+                                          type: object
+                                          properties:
+                                                email:
+                                                      type: string
+                                                      example: "john.doe@gmail.com"
+                  responses:
+                        200:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 200
+                                                      message:
+                                                            type: string
+                                                            example: OTP sent successfully, Please check your mail.
+                        400:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 400
+                                                      message:
+                                                            type: string
+                                                            example: <Error Message>
+
+      #? 2. Route for verify otp
+      /api/otp/verify:
+            post:
+                  summary: Verify OTP
+                  description: Verifies the OTP entered by the user.
+                  tags:
+                        - OTP
+                  requestBody:
+                        required: true
+                        content:
+                              application/json:
+                                    schema:
+                                          type: object
+                                          properties:
+                                                otp:
+                                                      type: string
+                                                      example: "123456"
+                  responses:
+                        200:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 200
+                                                      message:
+                                                            type: string
+                                                            example: OTP verification. successful.
+                        400:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 400
+                                                      message:
+                                                            type: string
+                                                            example: <Error Message>
+
+      #? 3. Route for reset password
+      /api/otp/reset-password:
+            post:
+                  summary: Reset Password
+                  description: Resets the user password using OTP verification.
+                  tags:
+                        - OTP
+                  requestBody:
+                        required: true
+                        content:
+                              application/json:
+                                    schema:
+                                          type: object
+                                          properties:
+                                                newPassword:
+                                                      type: string
+                                                      example: "NewSecurePassword123!"
+                  responses:
+                        200:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 200
+                                                      message:
+                                                            type: string
+                                                            example: Password changed successfully.
+                        400:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 400
+                                                      message:
+                                                            type: string
+                                                            example: <Error Message>

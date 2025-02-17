@@ -1,0 +1,450 @@
+paths:
+      #? 1. Route for signup
+      /api/users/signup:
+            post:
+                  summary: Register user
+                  description: Register user to the database
+                  tags:
+                        - User
+                  requestBody:
+                        required: true
+                        content:
+                              application/json:
+                                    schema:
+                                          type: object
+                                          properties:
+                                                name:
+                                                      type: string
+                                                      example: John Doe
+                                                      required: true
+                                                email:
+                                                      type: string
+                                                      example: john.doe@gmail.com
+                                                      required: true
+                                                password:
+                                                      type: string
+                                                      example: 1234
+                                                      required: true
+                                                gender:
+                                                      type: string
+                                                      example: male
+                                                      required: true
+                                                avatar:
+                                                      type: string
+                                                      format: binary
+                                                      example: imageUrl-1739545022055-958673815.png
+                              multipart/form-data:
+                                    schema:
+                                          type: object
+                                          properties:
+                                                name:
+                                                      type: string
+                                                      example: John Doe
+                                                      required: true
+                                                email:
+                                                      type: string
+                                                      example: john.doe@gmail.com
+                                                      required: true
+                                                password:
+                                                      type: string
+                                                      example: 1234
+                                                      required: true
+                                                gender:
+                                                      type: string
+                                                      example: male
+                                                      required: true
+                                                avatar:
+                                                      type: string
+                                                      format: binary
+                                                      example: imageUrl-1739545022055-958673815.png
+                  responses:
+                        201:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 201
+                                                      message:
+                                                            type: string
+                                                            example: User registered successfully.
+                                                      data:
+                                                            type: object
+                                                            properties:
+                                                                  _id:
+                                                                        type: string
+                                                                        example: 67ae2cc503577161edc3f8b4
+                                                                  name:
+                                                                        type: string
+                                                                        example: John Doe
+                                                                  email:
+                                                                        type: string
+                                                                        example: 67ae2cc503577161edc3f8b4
+                                                                  avatar:
+                                                                        type: string
+                                                                        example: /public/avatar-1739466953910-418294063.png
+                                                                  gender:
+                                                                        type: string
+                                                                        example: MALE
+                                                                  sessions:
+                                                                        type: array
+                                                                        example: []
+                                                                  createdAt:
+                                                                        type: string
+                                                                        example: 2025-02-14T04:52:09.981Z
+                                                                  updatedAt:
+                                                                        type: array
+                                                                        example: 2025-02-14T04:52:09.981Z
+                        400:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 400
+                                                      message:
+                                                            type: string
+                                                            example: <Error Message>
+
+      # ? 2. Route for login
+      /api/users/signin:
+            post:
+                  summary: Login user
+                  description: Login user to the database
+                  tags:
+                        - User
+                  requestBody:
+                        required: true
+                        content:
+                              application/json:
+                                    schema:
+                                          type: object
+                                          properties:
+                                                email:
+                                                      type: string
+                                                      example: john.doe@gmail.com
+                                                password:
+                                                      type: string
+                                                      example: 1234
+                  responses:
+                        200:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 200
+                                                      message:
+                                                            type: string
+                                                            example: User logged in successfully.
+                                                      data:
+                                                            $ref: "#components/schemas/User"
+                        400:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 400
+                                                      message:
+                                                            type: string
+                                                            example: <Error Message>
+
+      # ? 3. Route for logout
+      /api/users/logout:
+            post:
+                  summary: Logout user
+                  description: Logout user's current session
+                  tags:
+                        - User
+                  responses:
+                        200:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 200
+                                                      message:
+                                                            type: string
+                                                            example: User logged out successfully.
+                        400:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 400
+                                                      message:
+                                                            type: string
+                                                            example: Session Expired
+
+      # ? 4. Route for Logout all Devices
+      /api/users/logout-all-devices:
+            post:
+                  summary: Logout from all devices
+                  description: Logout from all devices
+                  tags:
+                        - User
+                  responses:
+                        200:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 200
+                                                      message:
+                                                            type: string
+                                                            example: User logged out from all devices successfully.
+                        400:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 200
+                                                      message:
+                                                            type: string
+                                                            example: Session Expired
+
+      # ? 5. Route for get user
+      /api/users/get-details:
+            get:
+                  summary: Get user
+                  description: Get user to the database
+                  tags:
+                        - User
+                  security:
+                        - bearerAuth: []
+                  responses:
+                        200:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 200
+                                                      message:
+                                                            type: string
+                                                            example: User fetched successfully.
+                                                      data:
+                                                            type: object
+                                                            properties:
+                                                                  _id:
+                                                                        type: string
+                                                                        example: 67ae2cc503577161edc3f8b4
+                                                                  name:
+                                                                        type: string
+                                                                        example: John Doe
+                                                                  email:
+                                                                        type: string
+                                                                        example: 67ae2cc503577161edc3f8b4
+                                                                  avatar:
+                                                                        type: string
+                                                                        example: /public/avatar-1739466953910-418294063.png
+                                                                  gender:
+                                                                        type: string
+                                                                        example: MALE
+                                                                  createdAt:
+                                                                        type: string
+                                                                        example: 2025-02-14T04:52:09.981Z
+                                                                  updatedAt:
+                                                                        type: array
+                                                                        example: 2025-02-14T04:52:09.981Z
+                        400:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 400
+                                                      message:
+                                                            type: string
+                                                            example: User not found
+
+      # ? 8. Route for Get all User's detail
+      /api/users/get-all-details:
+            get:
+                  summary: Get all User's detail
+                  description: Return list of user's with their details
+                  tags:
+                        - User
+                  responses:
+                        200:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 200
+                                                      message:
+                                                            type: string
+                                                            example: User's list fetched successfully.
+                                                      data:
+                                                            type: array
+                                                            items:
+                                                                  properties:
+                                                                        _id:
+                                                                              type: string
+                                                                              example: 67ae2cc503577161edc3f8b4
+                                                                        name:
+                                                                              type: string
+                                                                              example: John Doe
+                                                                        email:
+                                                                              type: string
+                                                                              example: 67ae2cc503577161edc3f8b4
+                                                                        avatar:
+                                                                              type: string
+                                                                              example: /public/avatar-1739466953910-418294063.png
+                                                                        gender:
+                                                                              type: string
+                                                                              example: MALE
+                                                                        createdAt:
+                                                                              type: string
+                                                                              example: 2025-02-14T04:52:09.981Z
+                                                                        updatedAt:
+                                                                              type: array
+                                                                              example: 2025-02-14T04:52:09.981Z
+                        400:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 400
+                                                      message:
+                                                            type: string
+                                                            example: <Error Message>
+
+      # ? 7. Route for update and delete user
+      /api/users/update-details:
+            put:
+                  summary: Update user
+                  description: Update user to the database
+                  tags:
+                        - User
+                  requestBody:
+                        required: true
+                        content:
+                              application/json:
+                                    schema:
+                                          type: object
+                                          properties:
+                                                name:
+                                                      type: string
+                                                      example: John Doe
+                                                avatar:
+                                                      type: string
+                                                      format: binary
+                                                      example: /public/avatar-1739466953910-418294063.png
+                                                gender:
+                                                      type: string
+                                                      example: MALE
+                              multipart/form-data:
+                                    schema:
+                                          type: object
+                                          properties:
+                                                name:
+                                                      type: string
+                                                      example: John Doe
+                                                avatar:
+                                                      type: string
+                                                      format: binary
+                                                      example: /public/avatar-1739466953910-418294063.png
+                                                gender:
+                                                      type: string
+                                                      example: MALE
+                  responses:
+                        200:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 200
+                                                      message:
+                                                            type: string
+                                                            example: User updated successfully.
+                                                      data:
+                                                            type: object
+                                                            properties:
+                                                                  _id:
+                                                                        type: string
+                                                                        example: 67ae2cc503577161edc3f8b4
+                                                                  name:
+                                                                        type: string
+                                                                        example: John Doe
+                                                                  email:
+                                                                        type: string
+                                                                        example: john.doe@gmail.com
+                                                                  avatar:
+                                                                        type: string
+                                                                        example: /public/avatar-1739466953910-418294063.png
+                                                                  gender:
+                                                                        type: string
+                                                                        example: MALE
+                                                                  updatedAt:
+                                                                        type: string
+                                                                        example: 2025-02-14T04:52:09.981Z
+
+            #? 8. Route for delete user
+      /api/users:
+            delete:
+                  summary: Delete user
+                  description: Delete user to the database
+                  tags:
+                        - User
+                  responses:
+                        200:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 200
+                                                      message:
+                                                            type: string
+                                                            example: User deleted successfully.
+                                                      data:
+                                                            $ref: "#components/schemas/User"
+                        400:
+                              content:
+                                    application/json:
+                                          schema:
+                                                type: object
+                                                properties:
+                                                      statusCode:
+                                                            type: number
+                                                            example: 400
+                                                      message:
+                                                            type: string
+                                                            example: <Error Message>
